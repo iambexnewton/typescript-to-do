@@ -6,4 +6,5 @@ isComplete: boolean}
 export type TaskProps= {
     tasks: Task[];
     setTasks: React.Dispatch<React.SetStateAction<Task[]>>
+    updateTaskCompletion: (taskID: string, isComplete: boolean) => void;
 }

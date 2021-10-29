@@ -8,7 +8,7 @@ type Props= TaskProps & {}
 
 
 
-const ListScreen: React.FC<Props> =({tasks, setTasks})=>{
+const ListScreen: React.FC<Props> =({tasks, setTasks, updateTaskCompletion})=>{
 
 const [newTaskLabel, setNewTaskLabel] = useState('');
 
@@ -27,13 +27,12 @@ const handleNewTaskKeyPress = (e:KeyboardEvent <HTMLInputElement>) => {
 };
 
 
-
-const handleTaskCompleteChange =(handledTask: Task) => (e:ChangeEvent <HTMLInputElement>) => {
-    setTasks(tasks => tasks.map(task => {
-        if (task.id === handledTask.id) return {...task, isComplete: e.target.checked}
-        return task
-    }))
+const handleTaskCompleteChange =
+(Task: Task) => (e:ChangeEvent <HTMLInputElement>) => {
+    updateTaskCompletion(
+        Task.id, e.target.checked);
 }
+
 
 
 
@@ -41,7 +40,7 @@ const handleTaskCompleteChange =(handledTask: Task) => (e:ChangeEvent <HTMLInput
 const handleClearClick =() => 
 setTasks((tasks)=> tasks.filter((task)=> !task.isComplete))
 
-
+console.log(tasks)
 
 
     return(
