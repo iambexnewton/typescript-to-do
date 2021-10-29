@@ -35,7 +35,11 @@ const handleTaskCompleteChange =
 
 
 
-
+const handleTaskDeleteClick = (handledTask: Task) => () => {
+    setTasks((tasks)=> tasks.filter((task) =>  task.id !==handledTask.id
+       
+    ))
+}
 
 const handleClearClick =() => 
 setTasks((tasks)=> tasks.filter((task)=> !task.isComplete))
@@ -50,7 +54,7 @@ console.log(tasks)
                     <input type="checkbox" checked={task.isComplete} onChange={handleTaskCompleteChange(task)}/>
                     
                     {task.label}
-
+<button onClick={handleTaskDeleteClick(task)}>delete</button>
                     
                     </li>))}
                 </div>

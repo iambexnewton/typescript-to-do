@@ -1,6 +1,7 @@
-export type Task ={id: string;
-    label: string;
-isComplete: boolean}
+export type Task ={
+    id: string,
+    label: string,
+    isComplete: boolean,}
 
 
 export type TaskProps= {
