@@ -1,16 +1,15 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import { nanoid } from 'nanoid'
+import {Task, TaskProps} from '../types'
 
-type Props= {}
-
-type Task ={id: string;
-    label: string;
-isComplete: boolean}
+type Props= TaskProps & {}
+    
 
 
 
-const ListScreen: React.FC<Props> =()=>{
-const [tasks, setTasks] = useState<Task[]>([])
+
+const ListScreen: React.FC<Props> =({tasks, setTasks})=>{
+
 const [newTaskLabel, setNewTaskLabel] = useState('');
 
 const handleNewTaskLabelChange = (e:ChangeEvent <HTMLInputElement>) =>
@@ -27,12 +26,16 @@ const handleNewTaskKeyPress = (e:KeyboardEvent <HTMLInputElement>) => {
     }
 };
 
-const handleCompleteChange =(handledTask: Task) => (e:ChangeEvent <HTMLInputElement>) => {
+
+
+const handleTaskCompleteChange =(handledTask: Task) => (e:ChangeEvent <HTMLInputElement>) => {
     setTasks(tasks => tasks.map(task => {
         if (task.id === handledTask.id) return {...task, isComplete: e.target.checked}
         return task
     }))
 }
+
+
 
 
 const handleClearClick =() => 
@@ -45,9 +48,12 @@ setTasks((tasks)=> tasks.filter((task)=> !task.isComplete))
         <div>
             <div>
                 {tasks.map((task) => (<li key={task.id}>
-                    <input type="checkbox" checked={task.isComplete} onChange={handleCompleteChange(task)}/>
+                    <input type="checkbox" checked={task.isComplete} onChange={handleTaskCompleteChange(task)}/>
                     
-                    {task.label}</li>))}
+                    {task.label}
+
+                    
+                    </li>))}
                 </div>
             <input value={newTaskLabel} onChange={handleNewTaskLabelChange} onKeyPress={handleNewTaskKeyPress}/>
 <div>
